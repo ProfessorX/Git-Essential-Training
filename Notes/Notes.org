@@ -1,0 +1,126 @@
+* What is Git?
+
+
+** Version Control System (VCS)
+   - Source code control system
+   - Revision control system
+   - Concurrent Versions System
+   - Apache Subversion
+   - BitKeeper SCM (distributed version control, community version)
+
+** Git is born
+   - Distributed
+   - Open source and free software
+   - Compatible with Unix-like systems
+   - Github launched 2008, 2011 2M repositories, over 1M users
+
+** Distributed version control
+   - different users maintain their own
+   - changes are stores as "change sets"
+   - No single master repo, just many working copies
+
+*** Pros
+    - no need to communicate with a central server
+    - encourage participation and "forking"
+    - "loose groups" of open source developers
+
+** Who should use Git
+   - anyone wanting to track edits
+   - anyone needing to share changes with collaborators
+   - anyone not afraid of command-line tools
+   - Programmers and Developers
+   - Not as useful for tracking *non-text* files
+
+* Git configuration
+   - System, Users, Project
+   - 
+
+* Getting Started
+ 
+** Initialize a repository
+   - git init
+   - ~echo "this is my first file" >> first_file.txt~
+   - See the *.sh file for detailed codes
+
+** Writing commit messages
+   - short single-line summary
+   - followed by a blank line and a more complete description
+   - Keep each line to less than 72 characters
+   - Write in present tense
+   - Bullet points
+
+*** Best practices
+    - "Add missing > in project section of HTML" NOT Fix Typo
+    - "Change user authentication to use Blowfish" NOT Update login code
+    - *Provide a good labour of what is inside the commit*
+    - MEMO: Write in present tense, note past tense.
+    - It's not about you, it's about what the COMMIT does.
+    - Use Emacs or Vim as your editor when you write your commit
+      messages. "She can look at it, and see what it is." WHEN SHE
+      DOES *git merge*.
+
+** Viewing the commit log
+   - git log; git log --help; git log -n 1; git log -n 2; git log -n 0
+   - 
+
+
+* Git concepts and architectures
+
+** Three-tree architecture
+   - Two-tree: repository, working
+     - commit, checkout
+   - Three-tree architecture
+     - repository, staging index, working
+     - git add file.txt, git commit file.txt
+     - We can make changes to 10 files but you can JUST commit 5
+       of 10. The rest files are still saved and waiting for your
+       another commit.
+
+** Git workflow
+   - Git works with a set of files that makes of "change sets"
+   - working --> staging index --> repository (~git commit~)
+   - ~git add~ --> ~git commit~
+   - ~git log~
+
+** Using hash values
+   - Git generates a checksum for each change set
+   - data integrity is fundamental
+   - Git uses SHA-1 hash algorithm to create checksums
+   - Referring to commits
+
+** Working with the HEAD pointer
+   - point to the "tip" of current branch in repository
+   - last state of repository
+   - AKA: point to *parent of next commit*
+   - Especially important in "branch" concepts.
+     - *Checkout --> tip of the currently checked-out branch*
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+

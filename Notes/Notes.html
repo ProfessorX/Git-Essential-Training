@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Notes</title>
+<!-- 2014-09-19 Fri 19:29 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Abraham Xiao" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Notes</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. What is Git?</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Version Control System (VCS)</a></li>
+<li><a href="#sec-1-2">1.2. Git is born</a></li>
+<li><a href="#sec-1-3">1.3. Distributed version control</a>
+<ul>
+<li><a href="#sec-1-3-1">1.3.1. Pros</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-4">1.4. Who should use Git</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Git configuration</a></li>
+<li><a href="#sec-3">3. Getting Started</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Initialize a repository</a></li>
+<li><a href="#sec-3-2">3.2. Writing commit messages</a>
+<ul>
+<li><a href="#sec-3-2-1">3.2.1. Best practices</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-3">3.3. Viewing the commit log</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Git concepts and architectures</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Three-tree architecture</a></li>
+<li><a href="#sec-4-2">4.2. Git workflow</a></li>
+<li><a href="#sec-4-3">4.3. Using hash values</a></li>
+<li><a href="#sec-4-4">4.4. Working with the HEAD pointer</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> What is Git?</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Version Control System (VCS)</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>Source code control system
+</li>
+<li>Revision control system
+</li>
+<li>Concurrent Versions System
+</li>
+<li>Apache Subversion
+</li>
+<li>BitKeeper SCM (distributed version control, community version)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Git is born</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>Distributed
+</li>
+<li>Open source and free software
+</li>
+<li>Compatible with Unix-like systems
+</li>
+<li>Github launched 2008, 2011 2M repositories, over 1M users
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Distributed version control</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>different users maintain their own
+</li>
+<li>changes are stores as "change sets"
+</li>
+<li>No single master repo, just many working copies
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> Pros</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<ul class="org-ul">
+<li>no need to communicate with a central server
+</li>
+<li>encourage participation and "forking"
+</li>
+<li>"loose groups" of open source developers
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Who should use Git</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li>anyone wanting to track edits
+</li>
+<li>anyone needing to share changes with collaborators
+</li>
+<li>anyone not afraid of command-line tools
+</li>
+<li>Programmers and Developers
+</li>
+<li>Not as useful for tracking <b>non-text</b> files
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Git configuration</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>System, Users, Project
+</li>
+<li></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Getting Started</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Initialize a repository</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>git init
+</li>
+<li><code>echo "this is my first file" &gt;&gt; first_file.txt</code>
+</li>
+<li>See the *.sh file for detailed codes
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Writing commit messages</h3>
+<div class="outline-text-3" id="text-3-2">
+<ul class="org-ul">
+<li>short single-line summary
+</li>
+<li>followed by a blank line and a more complete description
+</li>
+<li>Keep each line to less than 72 characters
+</li>
+<li>Write in present tense
+</li>
+<li>Bullet points
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> Best practices</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<ul class="org-ul">
+<li>"Add missing &gt; in project section of HTML" NOT Fix Typo
+</li>
+<li>"Change user authentication to use Blowfish" NOT Update login code
+</li>
+<li><b>Provide a good labour of what is inside the commit</b>
+</li>
+<li>MEMO: Write in present tense, note past tense.
+</li>
+<li>It's not about you, it's about what the COMMIT does.
+</li>
+<li>Use Emacs or Vim as your editor when you write your commit
+messages. "She can look at it, and see what it is." WHEN SHE
+DOES <b>git merge</b>.
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Viewing the commit log</h3>
+<div class="outline-text-3" id="text-3-3">
+<ul class="org-ul">
+<li>git log; git log &#x2013;help; git log -n 1; git log -n 2; git log -n 0
+</li>
+<li></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Git concepts and architectures</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Three-tree architecture</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>Two-tree: repository, working
+<ul class="org-ul">
+<li>commit, checkout
+</li>
+</ul>
+</li>
+<li>Three-tree architecture
+<ul class="org-ul">
+<li>repository, staging index, working
+</li>
+<li>git add file.txt, git commit file.txt
+</li>
+<li>We can make changes to 10 files but you can JUST commit 5
+of 10. The rest files are still saved and waiting for your
+another commit.
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Git workflow</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li>Git works with a set of files that makes of "change sets"
+</li>
+<li>working &#x2013;&gt; staging index &#x2013;&gt; repository (<code>git commit</code>)
+</li>
+<li><code>git add</code> &#x2013;&gt; <code>git commit</code>
+</li>
+<li><code>git log</code>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Using hash values</h3>
+<div class="outline-text-3" id="text-4-3">
+<ul class="org-ul">
+<li>Git generates a checksum for each change set
+</li>
+<li>data integrity is fundamental
+</li>
+<li>Git uses SHA-1 hash algorithm to create checksums
+</li>
+<li>Referring to commits
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Working with the HEAD pointer</h3>
+<div class="outline-text-3" id="text-4-4">
+<ul class="org-ul">
+<li>point to the "tip" of current branch in repository
+</li>
+<li>last state of repository
+</li>
+<li>AKA: point to <b>parent of next commit</b>
+</li>
+<li>Especially important in "branch" concepts.
+<ul class="org-ul">
+<li><b>Checkout &#x2013;&gt; tip of the currently checked-out branch</b>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Abraham Xiao</p>
+<p class="date">Created: 2014-09-19 Fri 19:29</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
