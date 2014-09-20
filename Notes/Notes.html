@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Notes</title>
-<!-- 2014-09-20 Sat 14:50 -->
+<!-- 2014-09-21 Sun 00:47 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Abraham Xiao" />
@@ -200,6 +200,58 @@ for the JavaScript code in this tag.
 <li><a href="#sec-7-4">7.4. Retrieving old commits</a></li>
 <li><a href="#sec-7-5">7.5. Reverting a commit</a></li>
 <li><a href="#sec-7-6">7.6. Using reset to undo commits</a></li>
+<li><a href="#sec-7-7">7.7. Demonstrating a soft reset</a></li>
+<li><a href="#sec-7-8">7.8. Demonstrating a mixed reset</a></li>
+<li><a href="#sec-7-9">7.9. Demonstrating a hard reset</a></li>
+<li><a href="#sec-7-10">7.10. Removing untracked files</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">8. Ignoring files</a>
+<ul>
+<li><a href="#sec-8-1">8.1. Using .gitignore files</a>
+<ul>
+<li><a href="#sec-8-1-1">8.1.1. Example</a></li>
+</ul>
+</li>
+<li><a href="#sec-8-2">8.2. Understanding what to ignore</a></li>
+<li><a href="#sec-8-3">8.3. Ignoring files globally</a></li>
+<li><a href="#sec-8-4">8.4. Ignoring tracked files</a></li>
+<li><a href="#sec-8-5">8.5. Tracking empty directory</a></li>
+</ul>
+</li>
+<li><a href="#sec-9">9. Navigating the Commit Tree</a>
+<ul>
+<li><a href="#sec-9-1">9.1. Referencing commits</a></li>
+<li><a href="#sec-9-2">9.2. Exploring tree listings</a></li>
+<li><a href="#sec-9-3">9.3. Getting more from the commit log</a></li>
+<li><a href="#sec-9-4">9.4. Viewing Commits</a></li>
+<li><a href="#sec-9-5">9.5. Comparing Commits</a></li>
+</ul>
+</li>
+<li><a href="#sec-10">10. Branching</a>
+<ul>
+<li><a href="#sec-10-1">10.1. Branching overview</a></li>
+<li><a href="#sec-10-2">10.2. Viewing and creating branch</a></li>
+<li><a href="#sec-10-3">10.3. Switching branches</a></li>
+<li><a href="#sec-10-4">10.4. Create and Switch Branches</a></li>
+<li><a href="#sec-10-5">10.5. Switching branches with uncommitted changes</a></li>
+<li><a href="#sec-10-6">10.6. Compare branches</a></li>
+<li><a href="#sec-10-7">10.7. Renaming branches</a></li>
+<li><a href="#sec-10-8">10.8. Deleting branches</a></li>
+<li><a href="#sec-10-9">10.9. Configuring the command prompt to show the branch</a></li>
+</ul>
+</li>
+<li><a href="#sec-11">11. Merging branches</a>
+<ul>
+<li><a href="#sec-11-1">11.1. Merging code</a></li>
+<li><a href="#sec-11-2">11.2. Using fast-forward merge v.s. true merge</a></li>
+<li><a href="#sec-11-3">11.3. Merging conflicts</a></li>
+<li><a href="#sec-11-4">11.4. Resolving merge conflicts</a>
+<ul>
+<li><a href="#sec-11-4-1">11.4.1. Abort, resolve manually or use a merge tool</a></li>
+</ul>
+</li>
+<li><a href="#sec-11-5">11.5. Exploring strategies to reduce merge conflicts</a></li>
 </ul>
 </li>
 </ul>
@@ -756,7 +808,8 @@ files renames, directories changed.
 <ul class="org-ul">
 <li><code>soft</code> does not change staging index or working directory
 </li>
-<li><code>mixed</code> default, changes the staging index to match repository
+<li><code>mixed</code> default, changes the staging index to match repository,
+does not change working directory
 </li>
 <li><code>hard</code> changes staging index and working directory to match
 repository (EXTREMELY DANGEROUS, BE CAUTIOUS)
@@ -766,11 +819,710 @@ repository (EXTREMELY DANGEROUS, BE CAUTIOUS)
 </ul>
 </div>
 </div>
+
+<div id="outline-container-sec-7-7" class="outline-3">
+<h3 id="sec-7-7"><span class="section-number-3">7.7</span> Demonstrating a soft reset</h3>
+<div class="outline-text-3" id="text-7-7">
+<ul class="org-ul">
+<li>"Rewind back in time to BEFORE this version"
+</li>
+<li>git reset &#x2013;soft $SOME<sub>OTHER</sub><sub>HASH</sub><sub>VALUE</sub>
+</li>
+<li>git diff &#x2013;staged (do not destructively get rid of our changes)
+</li>
+<li>git reset &#x2013;soft $HASH<sub>VALUE</sub> (this refers to the commit you want
+to "go back" again)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-7-8" class="outline-3">
+<h3 id="sec-7-8"><span class="section-number-3">7.8</span> Demonstrating a mixed reset</h3>
+<div class="outline-text-3" id="text-7-8">
+<ul class="org-ul">
+<li>Makes the staging reset looks the same.
+</li>
+<li>git reset &#x2013;mixed $SOME<sub>OTHER</sub><sub>HASH</sub><sub>VALUE</sub>
+</li>
+<li>These changes are NOT GONE! They are still in our working directory.
+</li>
+<li>Now you can go and modify and make those changes again.
+</li>
+<li>git add .
+</li>
+<li>git status
+</li>
+<li>One terminology, <b>Finite State Machine</b>.
+</li>
+<li></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-7-9" class="outline-3">
+<h3 id="sec-7-9"><span class="section-number-3">7.9</span> Demonstrating a hard reset</h3>
+<div class="outline-text-3" id="text-7-9">
+<ul class="org-ul">
+<li>Rewind the HEAD pointer, and throw out everything after that
+(that means after the commit you reset)
+</li>
+<li>"I do not want everything that happened after that. I JUST WISH
+TO GO BACK!!!"
+</li>
+<li>git reset &#x2013;hard $SOME<sub>OTHER</sub><sub>HASH</sub><sub>VALUE</sub>
+</li>
+<li>git log
+</li>
+<li>git status
+</li>
+<li><b>But those old commits are still there!</b> You can still use the
+<code>git reset --hard $HASH_VALUE</code> go back.
+</li>
+<li>Do some modifications.
+</li>
+<li>git commit -am "Moved sunglasses higher in list of suggested
+outdoor items"
+</li>
+<li><b>Just be careful when you use them!</b> They do allow you to
+overwrite data
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-7-10" class="outline-3">
+<h3 id="sec-7-10"><span class="section-number-3">7.10</span> Removing untracked files</h3>
+<div class="outline-text-3" id="text-7-10">
+<ul class="org-ul">
+<li>Create some junk files
+</li>
+<li><code>git clean</code>
+</li>
+<li>git clean -n; git clean -f (throw away the untracked files, they
+will be permanently deleted)
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Ignoring files</h2>
+<div class="outline-text-2" id="text-8">
+</div><div id="outline-container-sec-8-1" class="outline-3">
+<h3 id="sec-8-1"><span class="section-number-3">8.1</span> Using .gitignore files</h3>
+<div class="outline-text-3" id="text-8-1">
+<ul class="org-ul">
+<li>What if it's a temporary file or a log file? Just tell git to
+ignore the file ALL-TOGETHER.
+</li>
+<li>create (or auto-create project/.gitignore)
+</li>
+<li>very basic regular expressions
+</li>
+<li>negate expressions with "!"
+</li>
+<li>ignore all files in a directory with a trailing slash, like
+"assets/videos/"
+</li>
+<li>And all these go back to the good old Command-Line shit. (Aka,
+shellcript and bala bala)
+</li>
+</ul>
+</div>
+<div id="outline-container-sec-8-1-1" class="outline-4">
+<h4 id="sec-8-1-1"><span class="section-number-4">8.1.1</span> Example</h4>
+<div class="outline-text-4" id="text-8-1-1">
+<ul class="org-ul">
+<li>nano .gitignore
+<ul class="org-ul">
+<li>tempfile.txt, and hit "RETURN"
+</li>
+</ul>
+</li>
+<li>git status
+</li>
+<li>.DS<sub>Stores</sub> <b>.zip *.gz log/</b>.log log/*.login.[0-9] assets/videos/
+assets/photoshop/ !assets/videos/tour<sub>*</sub>.mp4 (sample .gitignore
+content)
+</li>
+<li>git add .gitignore
+</li>
+<li>git commit -m "Add .gitignore file"
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8-2" class="outline-3">
+<h3 id="sec-8-2"><span class="section-number-3">8.2</span> Understanding what to ignore</h3>
+<div class="outline-text-3" id="text-8-2">
+<ul class="org-ul">
+<li>Compiled source code
+</li>
+<li>Packages and compressed files
+</li>
+<li>Logs and databases
+</li>
+<li>Operating system generated files
+</li>
+<li>user-uploaded assets (images, PDFs, videos)
+</li>
+<li><a href="https://htlp.github.com/articles/ignoring-files">https://htlp.github.com/articles/ignoring-files</a>
+</li>
+<li><a href="https://github,com/github/gitignore">https://github,com/github/gitignore</a>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-8-3" class="outline-3">
+<h3 id="sec-8-3"><span class="section-number-3">8.3</span> Ignoring files globally</h3>
+<div class="outline-text-3" id="text-8-3">
+<ul class="org-ul">
+<li>ignore files in all repositories
+</li>
+<li>settings not tracked in repository
+</li>
+<li>user-specific instead of repository-specific
+</li>
+<li>Add/Edit the global ignore files, and then use the following
+command to configure
+</li>
+<li>git config &#x2013;global core.excludesfile ~/.gitignore<sub>global</sub> (the
+filename differs as you want)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-8-4" class="outline-3">
+<h3 id="sec-8-4"><span class="section-number-3">8.4</span> Ignoring tracked files</h3>
+<div class="outline-text-3" id="text-8-4">
+<ul class="org-ul">
+<li>git add tempfile2.txt
+</li>
+<li>git commit -m "Add tempfile2.txt to working directory"
+</li>
+<li>"So I am going to use the command line :) "
+</li>
+<li>"What if we want to leave it in our repository?"
+</li>
+<li>git rm &#x2013;cached tempfile2.txt (SEARCH THE FUCKING WEB, AND READ
+THE FUCKING MANUAL)
+</li>
+<li>More changes made to tempfile2.txt will <b>not</b> be tracked. Because
+it has been removed from the staging index, aka, the cache.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-8-5" class="outline-3">
+<h3 id="sec-8-5"><span class="section-number-3">8.5</span> Tracking empty directory</h3>
+<div class="outline-text-3" id="text-8-5">
+<ul class="org-ul">
+<li>cd $YOUR<sub>WORKING</sub><sub>FOLDER</sub> &amp;&amp; mkdir $SOME<sub>NEW</sub><sub>EMPTY</sub><sub>FOLDER</sub>
+</li>
+<li>cd $SOME<sub>NEW</sub><sub>EMPTY</sub><sub>FOLDER</sub> &amp;&amp; <b>touch .gitkeep</b>
+</li>
+<li>How-todo: Just add some empty files in the directory which you
+want git to track. As simple as that.
+</li>
+<li>No matter how small, it has to be a file, so the directory is NOT
+empty. 
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Navigating the Commit Tree</h2>
+<div class="outline-text-2" id="text-9">
+</div><div id="outline-container-sec-9-1" class="outline-3">
+<h3 id="sec-9-1"><span class="section-number-3">9.1</span> Referencing commits</h3>
+<div class="outline-text-3" id="text-9-1">
+<ul class="org-ul">
+<li>Tree-ish
+<ul class="org-ul">
+<li>full SHA-1 hash
+</li>
+<li>short SHA-1 hash, at least 4 characters, unambiguous (8-10
+characters)
+</li>
+</ul>
+</li>
+<li>HEAD pointer
+</li>
+<li>branch reference, tag reference (It seems that TAG is extremely
+popular)
+</li>
+<li>parent commit
+<ul class="org-ul">
+<li>HEAD^, HEAD~1, master^, HEAD~
+</li>
+</ul>
+</li>
+<li>grandparent commit
+<ul class="org-ul">
+<li>HEAD^^, HEAD~2
+</li>
+</ul>
+</li>
+<li>great-grandparent commit
+<ul class="org-ul">
+<li>HEAD^^^, HEAD~3 (tide notation is more, well, compact)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-9-2" class="outline-3">
+<h3 id="sec-9-2"><span class="section-number-3">9.2</span> Exploring tree listings</h3>
+<div class="outline-text-3" id="text-9-2">
+<ul class="org-ul">
+<li>pwd; ls -al
+</li>
+<li>git ls-tree
+</li>
+<li>git ls-tree master assets/
+</li>
+<li>git ls-tree master~1 assets/ (guess what a tree is? A tree is a
+DIRECTORY! This clearly explains the tree-ish notation.)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-9-3" class="outline-3">
+<h3 id="sec-9-3"><span class="section-number-3">9.3</span> Getting more from the commit log</h3>
+<div class="outline-text-3" id="text-9-3">
+<ul class="org-ul">
+<li>git log &#x2013;oneline
+</li>
+<li>git log &#x2013;oneline -3
+</li>
+<li>git log &#x2013;oneline -5 (how many logs to be shown)
+</li>
+<li>git log &#x2013;since="2012-06-20"
+</li>
+<li>git log &#x2013;until="2012-06-20"
+</li>
+<li>git log &#x2013;since="2 weeks ago" &#x2013;until="3 days ago" (2.weeks
+3.days)
+</li>
+<li>git log &#x2013;author="Kevin" (nice to filter out when collaborate
+with other people)
+</li>
+<li>git log &#x2013;grep="temp"
+</li>
+<li><b>You can see now why good commit messages is very helpful!</b> It
+can help you search.
+</li>
+<li>git log $HASH<sub>VALUE</sub>..$SOME<sub>OTHER</sub><sub>HASH</sub><sub>VALUE</sub> index.html (or some
+specific file)
+</li>
+<li>git log -p (p for patch to show the difference) It is recommended
+to combine some of those commands.
+</li>
+<li>git log &#x2013;stat &#x2013;summary (idea of quantities changes)
+</li>
+<li><b>Pretty Cool</b> git log &#x2013;graph ; git log &#x2013;oneline &#x2013;graph &#x2013;all
+&#x2013; decorate
+</li>
+<li>DIG TO THE LOG FILES, READ AND PRACTICE MORE, PLEASE!
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-9-4" class="outline-3">
+<h3 id="sec-9-4"><span class="section-number-3">9.4</span> Viewing Commits</h3>
+<div class="outline-text-3" id="text-9-4">
+<ul class="org-ul">
+<li>git log &#x2013;oneline
+</li>
+<li>git show $HASH<sub>VALUE</sub> (of your specific commit)
+</li>
+<li>git show &#x2013;format=oneline HEAD~2
+</li>
+<li>git show &#x2013;format=oneline HEAD~3
+</li>
+<li>git ls-tree master
+</li>
+<li>git show $HASH<sub>VALUE</sub> (of your tree/blobs/etc)
+</li>
+<li>use <b>git show &#x2013;help</b> to find more of your concern
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-9-5" class="outline-3">
+<h3 id="sec-9-5"><span class="section-number-3">9.5</span> Comparing Commits</h3>
+<div class="outline-text-3" id="text-9-5">
+<ul class="org-ul">
+<li>Compare the "directory" of that commit
+</li>
+<li>use <b>git status</b> and for remote management <b>git pull</b> often is a
+good habit
+</li>
+<li>git diff &#x2013;staged; git diff &#x2013;cached
+</li>
+<li>"The diff tool is very flexible."
+</li>
+<li>git log &#x2013;oneline; git diff $HASH<sub>VALUE</sub> (of tree-ish stuff)
+</li>
+<li>"We can compare where we are now and what's different in the
+past"
+</li>
+<li>As in Xnix system, you can use the good old "git diff" to compare
+<b>two</b> or more things. By the way, READ THE FUCKING MANUAL.
+</li>
+<li>git diff &#x2013;stat &#x2013;summary $SOME<sub>OTHER</sub><sub>HASH</sub><sub>VALUE</sub>..HEAD
+(&#x2013;ignore-space-change &#x2013;ignore-all-space -b (ignore space
+changes) -w (ignore all spaces))
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Branching</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+One of the most powerful features in Git
+</p>
+</div>
+
+<div id="outline-container-sec-10-1" class="outline-3">
+<h3 id="sec-10-1"><span class="section-number-3">10.1</span> Branching overview</h3>
+<div class="outline-text-3" id="text-10-1">
+<ul class="org-ul">
+<li>branches are cheap
+<ul class="org-ul">
+<li>try new ideas
+</li>
+<li>isolate features or sections of work. When all is finished, we
+can merge it into "master" branch.      
+</li>
+</ul>
+</li>
+<li>One working directory.
+</li>
+<li>fast context switching.
+<ul class="org-ul">
+<li>master&#x2026;some other features&#x2026;merge (will create a new commit)
+</li>
+</ul>
+</li>
+<li>We could have mini branches and merge more often.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-10-2" class="outline-3">
+<h3 id="sec-10-2"><span class="section-number-3">10.2</span> Viewing and creating branch</h3>
+<div class="outline-text-3" id="text-10-2">
+<ul class="org-ul">
+<li>git branch; cat .git/HEAD; ls -al .git/refs/heads
+</li>
+<li>cat .git/refs/head/master
+</li>
+<li><b>Create a new branch</b> git branch $BRANCH<sub>NAME</sub> (stay away from
+punctuation); ls -al .git/refs/heads
+</li>
+<li>cat .git/refs/heads/$BRANCH<sub>NAME</sub>
+</li>
+<li>cat .git/HEAD
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-10-3" class="outline-3">
+<h3 id="sec-10-3"><span class="section-number-3">10.3</span> Switching branches</h3>
+<div class="outline-text-3" id="text-10-3">
+<ul class="org-ul">
+<li>"We do that by checking out the branch"
+</li>
+<li>git checkout $BRANCH<sub>NAME</sub>; cat .git/HEAD;
+</li>
+<li>git status; git commit -am "Modified title of bala bala"; git log
+&#x2013;oneline
+</li>
+<li>git checkout master; git log &#x2013;oneline (Branching when needed,
+but not when you "feel like". Use your own judgment)
+</li>
+<li>It's that easy to swap out files and folders when you have
+multiple branches, just check it out.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-10-4" class="outline-3">
+<h3 id="sec-10-4"><span class="section-number-3">10.4</span> Create and Switch Branches</h3>
+<div class="outline-text-3" id="text-10-4">
+<ul class="org-ul">
+<li>pwd; git log &#x2013;oneline; git show HEAD
+</li>
+<li>git checkout -b $BRANCH<sub>NAME</sub> (checkout and switching at the same
+time) <b>Give your branch useful and meaningful name</b>
+</li>
+<li>git branch; git log &#x2013;oneline;
+</li>
+<li>Re: git checkout &#x2013; &lt;file&gt; ("&#x2013;" just keeps you in this working
+branch, so you do not mess it up)
+</li>
+<li>git add $SOME<sub>FILES</sub>; git commit -m "Your commit message"; git log
+&#x2013;oneline
+</li>
+<li>git checkout master; git log &#x2013;graph &#x2013;oneline &#x2013;decorate &#x2013;all
+(You really understand how the switching works and you really
+should feel comfortable with it. Because this is normal when you
+begin to, well ,work)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-10-5" class="outline-3">
+<h3 id="sec-10-5"><span class="section-number-3">10.5</span> Switching branches with uncommitted changes</h3>
+<div class="outline-text-3" id="text-10-5">
+<ul class="org-ul">
+<li>checkout (go and get the latest branch, so your working directory
+must be clean to do that)
+</li>
+<li>git status; make some changes to your files; git status;
+</li>
+<li>git checkout master (Commit your changes or stash them <b>before</b>
+     <b>you can switch branches</b>)
+</li>
+<li>Possible options:
+<ul class="org-ul">
+<li><code>checkout -- &lt;file&gt;</code> to discard changes
+</li>
+<li>commit; git commit -am "Swap out - for : in index.html title"
+</li>
+<li>stash
+</li>
+</ul>
+</li>
+<li>You cannot have anything that may <b>lose</b> data when switch branch!
+(Empty file or those that do not violate this rule)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-10-6" class="outline-3">
+<h3 id="sec-10-6"><span class="section-number-3">10.6</span> Compare branches</h3>
+<div class="outline-text-3" id="text-10-6">
+<ul class="org-ul">
+<li>git diff $NAME<sub>OF</sub><sub>BRANCHES</sub>; git diff master..new<sub>features</sub>
+</li>
+<li>git diff master..some<sub>other</sub><sub>branch</sub>
+</li>
+<li>git diff &#x2013;color-words branch1..branch2
+</li>
+<li>"<b>tree-ish</b>" concept in git
+</li>
+<li>git branch &#x2013;merged (checkout some different branches and use
+this command to see what will happen)
+</li>
+<li></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-10-7" class="outline-3">
+<h3 id="sec-10-7"><span class="section-number-3">10.7</span> Renaming branches</h3>
+<div class="outline-text-3" id="text-10-7">
+<ul class="org-ul">
+<li>pwd; git branch
+</li>
+<li>git diff master..branch1;
+</li>
+<li>Rename branch: git branch -m branch1 renamed<sub>branch1</sub>; (git
+considers rename as mv, the same way as Xnix does)
+</li>
+<li>Give your branch <b>meaningful names</b> that help you distinguish
+what the commits are all about!
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-10-8" class="outline-3">
+<h3 id="sec-10-8"><span class="section-number-3">10.8</span> Deleting branches</h3>
+<div class="outline-text-3" id="text-10-8">
+<ul class="org-ul">
+<li>git branch branch<sub>to</sub><sub>delete</sub>; (born to be deleted)
+</li>
+<li>git branch -d branch<sub>to</sub><sub>delete</sub>
+</li>
+<li>git branch (check whether it is still there)
+</li>
+<li>git branch branch<sub>to</sub><sub>delete</sub>;
+</li>
+<li>git checkout branch<sub>to</sub><sub>delete</sub>; git branch -d branch<sub>to</sub><sub>delete</sub>;
+(this operation would failed because you CANNOT delete the branch
+which you are currently on.)
+</li>
+<li>"The branch 'branch<sub>to</sub><sub>delete'</sub> is not fully merged! If you are
+sure you want to delete it, run 'git branch -D branch<sub>to</sub><sub>delete'</sub>"
+</li>
+<li><b>Read the fucking Manual</b> man! Be a real professional, work hard
+and fight for a bright future. (Commented by Abraham)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-10-9" class="outline-3">
+<h3 id="sec-10-9"><span class="section-number-3">10.9</span> Configuring the command prompt to show the branch</h3>
+<div class="outline-text-3" id="text-10-9">
+<ul class="org-ul">
+<li>Not necessary, but most Git developers choose to do this.
+</li>
+<li>There are some configurations in your shell config file. Do it at
+your own wish.
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Merging branches</h2>
+<div class="outline-text-2" id="text-11">
+</div><div id="outline-container-sec-11-1" class="outline-3">
+<h3 id="sec-11-1"><span class="section-number-3">11.1</span> Merging code</h3>
+<div class="outline-text-3" id="text-11-1">
+<ul class="org-ul">
+<li>Pull request and merge operation.
+</li>
+<li>First, check out the "receiver"
+</li>
+<li>git checkout master; git merge $SOME<sub>BRANCH</sub>
+</li>
+<li>git diff master..$SOME<sub>BRANCH</sub> (see if there are still some
+differences) 
+</li>
+<li>git branch &#x2013;merged
+</li>
+<li>You always want to run "git merge" with a clean working directory
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-11-2" class="outline-3">
+<h3 id="sec-11-2"><span class="section-number-3">11.2</span> Using fast-forward merge v.s. true merge</h3>
+<div class="outline-text-3" id="text-11-2">
+<ul class="org-ul">
+<li>Fast-forward: move the commit along the timeline, then move the
+HEAD pointer.
+</li>
+<li>git merge &#x2013;no-ff branch; (You do not want to merge quietly, you
+want to log something)
+</li>
+<li>Non-fast-forward merge: when the HEAD pointer is not in the
+current branch (practice more to feel)
+</li>
+<li>git merge $SOME<sub>OTHER</sub><sub>BRANCH</sub>
+</li>
+<li>Merge has different strategies for merging.
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-11-3" class="outline-3">
+<h3 id="sec-11-3"><span class="section-number-3">11.3</span> Merging conflicts</h3>
+<div class="outline-text-3" id="text-11-3">
+<ul class="org-ul">
+<li>Git cannot decide which one to use or how to merge them
+together.
+</li>
+<li>Example:
+<ul class="org-ul">
+<li>&lt;span&gt;Git is great.&lt;/span&gt;
+</li>
+<li>&lt;strong&gt;Git is great.&lt;/strong&gt;
+</li>
+<li>&lt;em&gt;Git is great.&lt;/em&gt; (Yet another branch, so HOW TO MERGE)
+</li>
+</ul>
+</li>
+<li>Make some changes to an existing file. (So to confuse the stupid
+Version Control.)
+</li>
+<li>Automatic merge failed! <b>Fix conflicts</b> and then commit the
+result.
+</li>
+<li>It's up to you to pick (or choose) which one to useful, aka to
+merge when there are "REAL" conflicts.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-11-4" class="outline-3">
+<h3 id="sec-11-4"><span class="section-number-3">11.4</span> Resolving merge conflicts</h3>
+<div class="outline-text-3" id="text-11-4">
+<ul class="org-ul">
+<li>git merge &#x2013;abort (You have to do something, or the conflict(s)
+are still there)
+</li>
+<li><b>Resolve those conflicts manually</b> Use your own judgment to
+resolve the conflict. Some are to be kept, others to be
+discarded.
+</li>
+<li>It's more "advanced" to use those merge tools.
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-11-4-1" class="outline-4">
+<h4 id="sec-11-4-1"><span class="section-number-4">11.4.1</span> Abort, resolve manually or use a merge tool</h4>
+</div>
+</div>
+
+<div id="outline-container-sec-11-5" class="outline-3">
+<h3 id="sec-11-5"><span class="section-number-3">11.5</span> Exploring strategies to reduce merge conflicts</h3>
+<div class="outline-text-3" id="text-11-5">
+<ul class="org-ul">
+<li>Keep lines short.
+</li>
+<li>Keep commits small and focused.
+</li>
+<li>Beware stray edits to whitespace.
+<ul class="org-ul">
+<li>spaces, tabs, line returns.
+</li>
+</ul>
+</li>
+<li>Merge often so the <b>conflicts are smaller to resolve</b>.
+</li>
+<li>The most important: Track changes to master, (aka, <b>git pull</b>)
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Abraham Xiao</p>
-<p class="date">Created: 2014-09-20 Sat 14:50</p>
+<p class="date">Created: 2014-09-21 Sun 00:47</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

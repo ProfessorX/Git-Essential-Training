@@ -288,8 +288,282 @@ You know what?! I am going to undo what I changed.
     - git commit -m "Add .gitignore file"
 
 ** Understanding what to ignore
+   - Compiled source code
+   - Packages and compressed files
+   - Logs and databases
+   - Operating system generated files
+   - user-uploaded assets (images, PDFs, videos)
+   - https://htlp.github.com/articles/ignoring-files
+   - https://github,com/github/gitignore
+
+** Ignoring files globally
+   - ignore files in all repositories
+   - settings not tracked in repository
+   - user-specific instead of repository-specific
+   - Add/Edit the global ignore files, and then use the following
+     command to configure
+   - git config --global core.excludesfile ~/.gitignore_global (the
+     filename differs as you want)
+
+** Ignoring tracked files
+   - git add tempfile2.txt
+   - git commit -m "Add tempfile2.txt to working directory"
+   - "So I am going to use the command line :) "
+   - "What if we want to leave it in our repository?"
+   - git rm --cached tempfile2.txt (SEARCH THE FUCKING WEB, AND READ
+     THE FUCKING MANUAL)
+   - More changes made to tempfile2.txt will *not* be tracked. Because
+     it has been removed from the staging index, aka, the cache.
+
+** Tracking empty directory
+   - cd $YOUR_WORKING_FOLDER && mkdir $SOME_NEW_EMPTY_FOLDER
+   - cd $SOME_NEW_EMPTY_FOLDER && *touch .gitkeep*
+   - How-todo: Just add some empty files in the directory which you
+     want git to track. As simple as that.
+   - No matter how small, it has to be a file, so the directory is NOT
+     empty. 
+
+* Navigating the Commit Tree
+
+** Referencing commits
+   - Tree-ish
+     - full SHA-1 hash
+     - short SHA-1 hash, at least 4 characters, unambiguous (8-10
+       characters)
+   - HEAD pointer
+   - branch reference, tag reference (It seems that TAG is extremely
+     popular)
+   - parent commit
+     - HEAD^, HEAD~1, master^, HEAD~
+   - grandparent commit
+     - HEAD^^, HEAD~2
+   - great-grandparent commit
+     - HEAD^^^, HEAD~3 (tide notation is more, well, compact)
+
+** Exploring tree listings
+   - pwd; ls -al
+   - git ls-tree
+   - git ls-tree master assets/
+   - git ls-tree master~1 assets/ (guess what a tree is? A tree is a
+     DIRECTORY! This clearly explains the tree-ish notation.)
+
+** Getting more from the commit log
+   - git log --oneline
+   - git log --oneline -3
+   - git log --oneline -5 (how many logs to be shown)
+   - git log --since="2012-06-20"
+   - git log --until="2012-06-20"
+   - git log --since="2 weeks ago" --until="3 days ago" (2.weeks
+     3.days)
+   - git log --author="Kevin" (nice to filter out when collaborate
+     with other people)
+   - git log --grep="temp"
+   - *You can see now why good commit messages is very helpful!* It
+     can help you search.
+   - git log $HASH_VALUE..$SOME_OTHER_HASH_VALUE index.html (or some
+     specific file)
+   - git log -p (p for patch to show the difference) It is recommended
+     to combine some of those commands.
+   - git log --stat --summary (idea of quantities changes)
+   - *Pretty Cool* git log --graph ; git log --oneline --graph --all
+     -- decorate
+   - DIG TO THE LOG FILES, READ AND PRACTICE MORE, PLEASE!
+
+** Viewing Commits
+   - git log --oneline
+   - git show $HASH_VALUE (of your specific commit)
+   - git show --format=oneline HEAD~2
+   - git show --format=oneline HEAD~3
+   - git ls-tree master
+   - git show $HASH_VALUE (of your tree/blobs/etc)
+   - use *git show --help* to find more of your concern
+
+# Life is a bitch, fuck it or leave it, choose one. I choose to fuck
+# it and graduate as normal in the United Arab Emirates.
+
+** Comparing Commits
+   - Compare the "directory" of that commit
+   - use *git status* and for remote management *git pull* often is a
+     good habit
+   - git diff --staged; git diff --cached
+   - "The diff tool is very flexible."
+   - git log --oneline; git diff $HASH_VALUE (of tree-ish stuff)
+   - "We can compare where we are now and what's different in the
+     past"
+   - As in Xnix system, you can use the good old "git diff" to compare
+     *two* or more things. By the way, READ THE FUCKING MANUAL.
+   - git diff --stat --summary $SOME_OTHER_HASH_VALUE..HEAD
+     (--ignore-space-change --ignore-all-space -b (ignore space
+     changes) -w (ignore all spaces))
+
+* Branching
+One of the most powerful features in Git
+
+** Branching overview
+   - branches are cheap
+     - try new ideas
+     - isolate features or sections of work. When all is finished, we
+       can merge it into "master" branch.      
+   - One working directory.
+   - fast context switching.
+     - master...some other features...merge (will create a new commit)
+   - We could have mini branches and merge more often.
+
+** Viewing and creating branch
+   - git branch; cat .git/HEAD; ls -al .git/refs/heads
+   - cat .git/refs/head/master
+   - *Create a new branch* git branch $BRANCH_NAME (stay away from
+     punctuation); ls -al .git/refs/heads
+   - cat .git/refs/heads/$BRANCH_NAME
+   - cat .git/HEAD
+
+** Switching branches
+   - "We do that by checking out the branch"
+   - git checkout $BRANCH_NAME; cat .git/HEAD;
+   - git status; git commit -am "Modified title of bala bala"; git log
+     --oneline
+   - git checkout master; git log --oneline (Branching when needed,
+     but not when you "feel like". Use your own judgment)
+   - It's that easy to swap out files and folders when you have
+     multiple branches, just check it out.
+
+** Create and Switch Branches
+   - pwd; git log --oneline; git show HEAD
+   - git checkout -b $BRANCH_NAME (checkout and switching at the same
+     time) *Give your branch useful and meaningful name*
+   - git branch; git log --oneline;
+   - Re: git checkout -- <file> ("--" just keeps you in this working
+     branch, so you do not mess it up)
+   - git add $SOME_FILES; git commit -m "Your commit message"; git log
+     --oneline
+   - git checkout master; git log --graph --oneline --decorate --all
+     (You really understand how the switching works and you really
+     should feel comfortable with it. Because this is normal when you
+     begin to, well ,work)
+
+** Switching branches with uncommitted changes
+   - checkout (go and get the latest branch, so your working directory
+     must be clean to do that)
+   - git status; make some changes to your files; git status;
+   - git checkout master (Commit your changes or stash them *before*
+     *you can switch branches*)
+   - Possible options:
+     - ~checkout -- <file>~ to discard changes
+     - commit; git commit -am "Swap out - for : in index.html title"
+     - stash
+   - You cannot have anything that may *lose* data when switch branch!
+     (Empty file or those that do not violate this rule)
+
+** Compare branches
+   - git diff $NAME_OF_BRANCHES; git diff master..new_features
+   - git diff master..some_other_branch
+   - git diff --color-words branch1..branch2
+   - "*tree-ish*" concept in git
+   - git branch --merged (checkout some different branches and use
+     this command to see what will happen)
    -
 
+** Renaming branches
+   - pwd; git branch
+   - git diff master..branch1;
+   - Rename branch: git branch -m branch1 renamed_branch1; (git
+     considers rename as mv, the same way as Xnix does)
+   - Give your branch *meaningful names* that help you distinguish
+     what the commits are all about!
+
+
+# Life is a bitch, fuck it or leave it, choose one.
+** Deleting branches
+   - git branch branch_to_delete; (born to be deleted)
+   - git branch -d branch_to_delete
+   - git branch (check whether it is still there)
+   - git branch branch_to_delete;
+   - git checkout branch_to_delete; git branch -d branch_to_delete;
+     (this operation would failed because you CANNOT delete the branch
+     which you are currently on.)
+   - "The branch 'branch_to_delete' is not fully merged! If you are
+     sure you want to delete it, run 'git branch -D branch_to_delete'"
+   - *Read the fucking Manual* man! Be a real professional, work hard
+     and fight for a bright future. (Commented by Abraham)
+
+** Configuring the command prompt to show the branch
+   - Not necessary, but most Git developers choose to do this.
+   - There are some configurations in your shell config file. Do it at
+     your own wish.
+
+* Merging branches
+
+** Merging code
+   - Pull request and merge operation.
+   - First, check out the "receiver"
+   - git checkout master; git merge $SOME_BRANCH
+   - git diff master..$SOME_BRANCH (see if there are still some
+     differences) 
+   - git branch --merged
+   - You always want to run "git merge" with a clean working directory
+
+** Using fast-forward merge v.s. true merge
+   - Fast-forward: move the commit along the timeline, then move the
+     HEAD pointer.
+   - git merge --no-ff branch; (You do not want to merge quietly, you
+     want to log something)
+   - Non-fast-forward merge: when the HEAD pointer is not in the
+     current branch (practice more to feel)
+   - git merge $SOME_OTHER_BRANCH
+   - Merge has different strategies for merging.
+
+
+** Merging conflicts
+   - Git cannot decide which one to use or how to merge them
+     together.
+   - Example:
+     - <span>Git is great.</span>
+     - <strong>Git is great.</strong>
+     - <em>Git is great.</em> (Yet another branch, so HOW TO MERGE)
+   - Make some changes to an existing file. (So to confuse the stupid
+     Version Control.)
+   - Automatic merge failed! *Fix conflicts* and then commit the
+     result.
+   - It's up to you to pick (or choose) which one to useful, aka to
+     merge when there are "REAL" conflicts.
+
+** Resolving merge conflicts
+   - git merge --abort (You have to do something, or the conflict(s)
+     are still there)
+   - *Resolve those conflicts manually* Use your own judgment to
+     resolve the conflict. Some are to be kept, others to be
+     discarded.
+   - It's more "advanced" to use those merge tools.
+
+*** Abort, resolve manually or use a merge tool
+
+** Exploring strategies to reduce merge conflicts
+   - Keep lines short.
+   - Keep commits small and focused.
+   - Beware stray edits to whitespace.
+     - spaces, tabs, line returns.
+   - Merge often so the *conflicts are smaller to resolve*.
+   - The most important: Track changes to master, (aka, *git pull*)
+
+* Stashing changes
+
+** Saving changes in the stash
+   - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
 
 
 
@@ -346,8 +620,7 @@ You know what?! I am going to undo what I changed.
 
 
 
-      
-
+         
 
 
 
