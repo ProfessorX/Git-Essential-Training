@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Notes</title>
-<!-- 2014-09-19 Fri 19:29 -->
+<!-- 2014-09-20 Sat 14:50 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Abraham Xiao" />
@@ -172,6 +172,34 @@ for the JavaScript code in this tag.
 <li><a href="#sec-4-2">4.2. Git workflow</a></li>
 <li><a href="#sec-4-3">4.3. Using hash values</a></li>
 <li><a href="#sec-4-4">4.4. Working with the HEAD pointer</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Making changes to files</a>
+<ul>
+<li><a href="#sec-5-1">5.1. Adding files</a></li>
+<li><a href="#sec-5-2">5.2. Editing files</a></li>
+<li><a href="#sec-5-3">5.3. Viewing changes with diff</a></li>
+<li><a href="#sec-5-4">5.4. Viewing only staged changed</a></li>
+<li><a href="#sec-5-5">5.5. Deleting files</a></li>
+<li><a href="#sec-5-6">5.6. Moving and renaming files</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6. Using Git in a Real Project</a>
+<ul>
+<li><a href="#sec-6-1">6.1. Introduce the Explore California web site</a></li>
+<li><a href="#sec-6-2">6.2. Initializing Git</a></li>
+<li><a href="#sec-6-3">6.3. Editing the support phone number</a></li>
+<li><a href="#sec-6-4">6.4. Editing the backpack file name and links</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7. Undoing Changes</a>
+<ul>
+<li><a href="#sec-7-1">7.1. Undoing working directory changes</a></li>
+<li><a href="#sec-7-2">7.2. Unstaging files</a></li>
+<li><a href="#sec-7-3">7.3. Amending commits</a></li>
+<li><a href="#sec-7-4">7.4. Retrieving old commits</a></li>
+<li><a href="#sec-7-5">7.5. Reverting a commit</a></li>
+<li><a href="#sec-7-6">7.6. Using reset to undo commits</a></li>
 </ul>
 </li>
 </ul>
@@ -423,10 +451,326 @@ another commit.
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Making changes to files</h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Adding files</h3>
+<div class="outline-text-3" id="text-5-1">
+<ul class="org-ul">
+<li>git status
+</li>
+<li>echo "This is the second file" &gt; second<sub>file</sub>.txt
+</li>
+<li>echo "This is the third file" &gt; third<sub>file</sub>.txt
+</li>
+<li>git add second<sub>file</sub>.txt; git status
+</li>
+<li>git commit -m "Add second file to project"
+</li>
+<li>git status; git log
+</li>
+<li>git add third<sub>file</sub>.txt
+</li>
+<li>git commit -m "Add third file to project"
+</li>
+<li>git status; git log
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Editing files</h3>
+<div class="outline-text-3" id="text-5-2">
+<ul class="org-ul">
+<li>Modify your file
+</li>
+<li>git status;
+</li>
+<li>git add $The file you modified
+</li>
+<li>git status
+</li>
+<li>git commit -m "Made changed to second/bala bala files"
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> Viewing changes with diff</h3>
+<div class="outline-text-3" id="text-5-3">
+<ul class="org-ul">
+<li>git diff
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-5-4" class="outline-3">
+<h3 id="sec-5-4"><span class="section-number-3">5.4</span> Viewing only staged changed</h3>
+<div class="outline-text-3" id="text-5-4">
+<ul class="org-ul">
+<li>git diff &#x2013;staged
+</li>
+<li>If you need to commit, just add and commit
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-5-5" class="outline-3">
+<h3 id="sec-5-5"><span class="section-number-3">5.5</span> Deleting files</h3>
+<div class="outline-text-3" id="text-5-5">
+<ul class="org-ul">
+<li>echo "This is the file to delete" &gt;&gt; file<sub>to</sub><sub>delete</sub>.txt
+</li>
+<li>git add .
+</li>
+<li>Add and commit those files (well, if you do bother)
+</li>
+<li>How to delete:
+<ul class="org-ul">
+<li>Move it to the trash
+</li>
+<li>git rm $file<sub>to</sub><sub>remove</sub> (this is the one-step process)
+</li>
+</ul>
+</li>
+<li>Add and commit if neede
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-5-6" class="outline-3">
+<h3 id="sec-5-6"><span class="section-number-3">5.6</span> Moving and renaming files</h3>
+<div class="outline-text-3" id="text-5-6">
+<ul class="org-ul">
+<li>Do it manually and then add to stage
+</li>
+<li>Let <b>git</b> do it for you.
+<ul class="org-ul">
+<li>git mv second<sub>file</sub>.txt secondary<sub>file</sub>.txt (this is just a
+sample code, use your own judgment in practice) (renaming)
+</li>
+<li>git mv third<sub>file</sub>.txt first<sub>directory</sub>/third<sub>file</sub>.txt (moving)
+</li>
+</ul>
+</li>
+<li>Add and commit if needed
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Using Git in a Real Project</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Introduce the Explore California web site</h3>
+<div class="outline-text-3" id="text-6-1">
+<ul class="org-ul">
+<li>The above operations (add commit; status log; mv rm) consist of
+70% of daily workload. 
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> Initializing Git</h3>
+<div class="outline-text-3" id="text-6-2">
+<ul class="org-ul">
+<li>git init
+</li>
+<li>git log
+</li>
+<li>git add . (I prefer <code>git add -A</code>)
+</li>
+<li>git commit -m "Initial Commit"
+</li>
+<li>git log
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3"><span class="section-number-3">6.3</span> Editing the support phone number</h3>
+<div class="outline-text-3" id="text-6-3">
+<ul class="org-ul">
+<li>Use the "find all" in your favorite text editor/IDE to change the
+phone number (Regular Expression is to be discussed and learned later)
+</li>
+<li>"more" "less" pager built into Unix. Highly recommend you use a
+"modern" text editor, aka, Emacs, Vim or &#x2026;
+</li>
+<li>git commit -a (for new files and deleted files, this does not do
+well. -&#x2014;Need to be verified on Git 2.0)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-6-4" class="outline-3">
+<h3 id="sec-6-4"><span class="section-number-3">6.4</span> Editing the backpack file name and links</h3>
+<div class="outline-text-3" id="text-6-4">
+<ul class="org-ul">
+<li>"But I think it is better, (really?) to do the rename in
+command-line".
+</li>
+<li>The staging and repository are for "Git" to use. You work in the
+"working" directory. This is important for "web-developers".
+</li>
+<li>Rule of thumb: deal different changes as different commits.
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Undoing Changes</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+You know what?! I am going to undo what I changed.
+</p>
+</div>
+
+<div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> Undoing working directory changes</h3>
+<div class="outline-text-3" id="text-7-1">
+<ul class="org-ul">
+<li>Kick it out or let it stay, it's a question.
+</li>
+<li>git checkedout &#x2013; index.html (this is to stay on the same branch,
+without the "&#x2013;" you may checkout the branch with the same name)
+</li>
+<li>git status
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2"><span class="section-number-3">7.2</span> Unstaging files</h3>
+<div class="outline-text-3" id="text-7-2">
+<ul class="org-ul">
+<li>You are trying to put together several commits
+</li>
+<li>"Use the git reset HEAD &lt;file&gt;" to unstage
+</li>
+<li>git reset HEAD resources.html
+</li>
+<li>git status (use this often, this will help you a lot)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-7-3" class="outline-3">
+<h3 id="sec-7-3"><span class="section-number-3">7.3</span> Amending commits</h3>
+<div class="outline-text-3" id="text-7-3">
+<ul class="org-ul">
+<li>"To generate its hash"-&#x2014;it's not recommended to change
+committed files, even just the commit message
+</li>
+<li>git add resources.html
+</li>
+<li>git commit -m "Rearrange the items to a trip"
+</li>
+<li>make some changes to resources.html
+</li>
+<li>git add resources.html
+</li>
+<li>git commit &#x2013;amend -m "Rearrange the items to bring on an outdoor
+trip" (<b>after the change, the hash value would be changed!</b>)
+</li>
+<li>We only have the ability to AMEND the VERY LAST commit
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-7-4" class="outline-3">
+<h3 id="sec-7-4"><span class="section-number-3">7.4</span> Retrieving old commits</h3>
+<div class="outline-text-3" id="text-7-4">
+<ul class="org-ul">
+<li>Record the mistakes you made, and record the fix.
+</li>
+<li>git status
+</li>
+<li>We can checkout the file from before you've made that change.
+</li>
+<li>git checkout $HASH<sub>VALUE</sub> &#x2013; resources.html (use the &#x2013; to stay on
+the same branch, this will be explained later)
+</li>
+<li></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-7-5" class="outline-3">
+<h3 id="sec-7-5"><span class="section-number-3">7.5</span> Reverting a commit</h3>
+<div class="outline-text-3" id="text-7-5">
+<ul class="org-ul">
+<li>Undo the changes of a commit, completely and totally.
+</li>
+<li>git revert (will do the complete opposite of your commit)
+</li>
+<li>git revert $HASH<sub>VALUE</sub> (and hit RETURN)
+</li>
+<li>Track your revert message (highly recommended)
+</li>
+<li>After you revert, there is a NEW commit tracking your revert
+operation.
+</li>
+<li><b>What if the changes are really complicated?</b> (git merge) Like
+files renames, directories changed.
+</li>
+<li>MERGE between the current branch and the new.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-7-6" class="outline-3">
+<h3 id="sec-7-6"><span class="section-number-3">7.6</span> Using reset to undo commits</h3>
+<div class="outline-text-3" id="text-7-6">
+<ul class="org-ul">
+<li>Powerful but very dangerous.
+</li>
+<li>git reset (specify where the HEAD pointer should point to)
+</li>
+<li>"I want to be in control, I want to move the HEAD pointer HERE"
+</li>
+<li>It does the same thing as "<b>rewind the record tape</b>"
+</li>
+<li>git reset
+<ul class="org-ul">
+<li><code>soft</code> does not change staging index or working directory
+</li>
+<li><code>mixed</code> default, changes the staging index to match repository
+</li>
+<li><code>hard</code> changes staging index and working directory to match
+repository (EXTREMELY DANGEROUS, BE CAUTIOUS)
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Abraham Xiao</p>
-<p class="date">Created: 2014-09-19 Fri 19:29</p>
+<p class="date">Created: 2014-09-20 Sat 14:50</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

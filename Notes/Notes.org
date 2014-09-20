@@ -94,7 +94,201 @@
    - AKA: point to *parent of next commit*
    - Especially important in "branch" concepts.
      - *Checkout --> tip of the currently checked-out branch*
+
+* Making changes to files
+
+** Adding files
+   - git status
+   - echo "This is the second file" > second_file.txt
+   - echo "This is the third file" > third_file.txt
+   - git add second_file.txt; git status
+   - git commit -m "Add second file to project"
+   - git status; git log
+   - git add third_file.txt
+   - git commit -m "Add third file to project"
+   - git status; git log
+
+** Editing files
+   - Modify your file
+   - git status;
+   - git add $The file you modified
+   - git status
+   - git commit -m "Made changed to second/bala bala files"
+
+** Viewing changes with diff
+   - git diff
+
+** Viewing only staged changed
+   - git diff --staged
+   - If you need to commit, just add and commit
+
+** Deleting files
+   - echo "This is the file to delete" >> file_to_delete.txt
+   - git add .
+   - Add and commit those files (well, if you do bother)
+   - How to delete:
+     - Move it to the trash
+     - git rm $file_to_remove (this is the one-step process)
+   - Add and commit if neede
+
+** Moving and renaming files
+   - Do it manually and then add to stage
+   - Let *git* do it for you.
+     - git mv second_file.txt secondary_file.txt (this is just a
+       sample code, use your own judgment in practice) (renaming)
+     - git mv third_file.txt first_directory/third_file.txt (moving)
+   - Add and commit if needed
+
+
+* Using Git in a Real Project
+
+** Introduce the Explore California web site
+   - The above operations (add commit; status log; mv rm) consist of
+     70% of daily workload. 
    
+** Initializing Git
+   - git init
+   - git log
+   - git add . (I prefer ~git add -A~)
+   - git commit -m "Initial Commit"
+   - git log
+
+** Editing the support phone number
+   - Use the "find all" in your favorite text editor/IDE to change the
+     phone number (Regular Expression is to be discussed and learned later)
+   - "more" "less" pager built into Unix. Highly recommend you use a
+     "modern" text editor, aka, Emacs, Vim or ...
+   - git commit -a (for new files and deleted files, this does not do
+     well. ----Need to be verified on Git 2.0)
+
+** Editing the backpack file name and links
+   - "But I think it is better, (really?) to do the rename in
+     command-line".
+   - The staging and repository are for "Git" to use. You work in the
+     "working" directory. This is important for "web-developers".
+   - Rule of thumb: deal different changes as different commits.
+
+
+* Undoing Changes
+You know what?! I am going to undo what I changed.
+
+** Undoing working directory changes
+   - Kick it out or let it stay, it's a question.
+   - git checkedout -- index.html (this is to stay on the same branch,
+     without the "--" you may checkout the branch with the same name)
+   - git status
+
+** Unstaging files
+   - You are trying to put together several commits
+   - "Use the git reset HEAD <file>" to unstage
+   - git reset HEAD resources.html
+   - git status (use this often, this will help you a lot)
+
+** Amending commits
+   - "To generate its hash"----it's not recommended to change
+     committed files, even just the commit message
+   - git add resources.html
+   - git commit -m "Rearrange the items to a trip"
+   - make some changes to resources.html
+   - git add resources.html
+   - git commit --amend -m "Rearrange the items to bring on an outdoor
+     trip" (*after the change, the hash value would be changed!*)
+   - We only have the ability to AMEND the VERY LAST commit
+
+** Retrieving old commits
+   - Record the mistakes you made, and record the fix.
+   - git status
+   - We can checkout the file from before you've made that change.
+   - git checkout $HASH_VALUE -- resources.html (use the -- to stay on
+     the same branch, this will be explained later)
+   - 
+
+** Reverting a commit
+   - Undo the changes of a commit, completely and totally.
+   - git revert (will do the complete opposite of your commit)
+   - git revert $HASH_VALUE (and hit RETURN)
+   - Track your revert message (highly recommended)
+   - After you revert, there is a NEW commit tracking your revert
+     operation.
+   - *What if the changes are really complicated?* (git merge) Like
+     files renames, directories changed.
+   - MERGE between the current branch and the new.
+
+** Using reset to undo commits
+   - Powerful but very dangerous.
+   - git reset (specify where the HEAD pointer should point to)
+   - "I want to be in control, I want to move the HEAD pointer HERE"
+   - It does the same thing as "*rewind the record tape*"
+   - git reset
+     - ~soft~ does not change staging index or working directory
+     - ~mixed~ default, changes the staging index to match repository,
+       does not change working directory
+     - ~hard~ changes staging index and working directory to match
+       repository (EXTREMELY DANGEROUS, BE CAUTIOUS)
+
+** Demonstrating a soft reset
+   - "Rewind back in time to BEFORE this version"
+   - git reset --soft $SOME_OTHER_HASH_VALUE
+   - git diff --staged (do not destructively get rid of our changes)
+   - git reset --soft $HASH_VALUE (this refers to the commit you want
+     to "go back" again)
+
+** Demonstrating a mixed reset
+   - Makes the staging reset looks the same.
+   - git reset --mixed $SOME_OTHER_HASH_VALUE
+   - These changes are NOT GONE! They are still in our working directory.
+   - Now you can go and modify and make those changes again.
+   - git add .
+   - git status
+   - One terminology, *Finite State Machine*.
+   - 
+
+** Demonstrating a hard reset
+   - Rewind the HEAD pointer, and throw out everything after that
+     (that means after the commit you reset)
+   - "I do not want everything that happened after that. I JUST WISH
+     TO GO BACK!!!"
+   - git reset --hard $SOME_OTHER_HASH_VALUE
+   - git log
+   - git status
+   - *But those old commits are still there!* You can still use the
+     ~git reset --hard $HASH_VALUE~ go back.
+   - Do some modifications.
+   - git commit -am "Moved sunglasses higher in list of suggested
+     outdoor items"
+   - *Just be careful when you use them!* They do allow you to
+     overwrite data
+
+** Removing untracked files
+   - Create some junk files
+   - ~git clean~
+   - git clean -n; git clean -f (throw away the untracked files, they
+     will be permanently deleted)
+
+* Ignoring files
+
+** Using .gitignore files
+   - What if it's a temporary file or a log file? Just tell git to
+     ignore the file ALL-TOGETHER.
+   - create (or auto-create project/.gitignore)
+   - very basic regular expressions
+   - negate expressions with "!"
+   - ignore all files in a directory with a trailing slash, like
+     "assets/videos/"
+   - And all these go back to the good old Command-Line shit. (Aka,
+     shellcript and bala bala)
+*** Example
+    - nano .gitignore
+      - tempfile.txt, and hit "RETURN"
+    - git status
+    - .DS_Stores *.zip *.gz log/*.log log/*.login.[0-9] assets/videos/
+      assets/photoshop/ !assets/videos/tour_*.mp4 (sample .gitignore
+      content)
+    - git add .gitignore
+    - git commit -m "Add .gitignore file"
+
+** Understanding what to ignore
+   -
 
 
 
@@ -118,7 +312,41 @@
 
 
 
-   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
 
 
